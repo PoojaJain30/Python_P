@@ -1,6 +1,8 @@
 import random
 ran_no = random.randint(1,100)
-guess_li = [0]
+#for testing purpose
+print(ran_no)
+guess_li = []
 print("WELCOME TO GUESS ME!")
 print("I'm thinking of a number between 1 and 100")
 print("If your guess is more than 10 away from my number, I'll tell you you're COLD")
@@ -15,7 +17,7 @@ while True :
         continue
     
     if (in_no == ran_no) :
-        print(f"Congratulations! You have guessed correct number in {len(guess_li)} guesses")
+        print(f"Congratulations! You have guessed correct number in {len(guess_li)+1} guesses")
         break
     
     guess_li.append(in_no)
