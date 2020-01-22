@@ -9,7 +9,7 @@ print("If your guess is farther than your most recent guess, I'll say you're get
 print("If your guess is closer than your most recent guess, I'll say you're getting WARMER")
 print("LET'S PLAY!")
 while True :
-    in_no = int(input("I'm thinking of a number between 1 and 100./n What number you are thinking :"))
+    in_no = int(input("I'm thinking of a number between 1 and 100.\n What number you are thinking :"))
     if (in_no < 1 or in_no > 100) :
         print("OUT OF BOUNDS","Please try another number")
         continue
