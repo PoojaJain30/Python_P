@@ -52,7 +52,7 @@ animal_crackers_1('Levelheaded llama')
 ####PAPER DOLL: Given a string, return a string where for every character in the original there are three characters
 def paper_doll(text):
     li=[]
-    for i,ch in enumerate(text):
+    for x,ch in enumerate(text):
         x=0
         while(x<3):
             li.append(ch)
