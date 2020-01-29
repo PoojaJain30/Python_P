@@ -2,7 +2,7 @@
 
 def has_33(nums):
     li = False
-    for i,ints in enumerate(nums):
+    for ints in enumerate(nums):
         if ints == 3 and nums[-2] == 3:
             li = True
         else:
