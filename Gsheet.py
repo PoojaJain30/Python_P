@@ -1,7 +1,39 @@
+# Getting data from google sheet and data handling
+
 import json
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import pprint
+
+rent = []
+utility = []
+food = []
+travel = []
+general = []
+car = []
+merchandise = []
+
+def get_allcategories(lists):
+    global rent
+    global utility
+    global food
+    global travel
+    global general
+    global car
+    global merchandise 
+    for i in range(len(lists)):
+        if lists[i]['Category'] == 'Rent':
+            rent.append(lists[i]['Price'][1:])
+        elif lists[i]['Category'] == 'Utility':
+            utility.append(float(lists[i]['Price'][1:]))
+        elif lists[i]['Category'] == 'Food':
+            food.append(float(lists[i]['Price'][1:]))
+        elif lists[i]['Category'] == 'General':
+            general.append(float(lists[i]['Price'][1:]))
+        elif lists[i]['Category'] == 'Travel':
+            travel.append(float(lists[i]['Price'][1:]))
+        elif lists[i]['Category'] == 'Merchandise':
+            merchandise.append(float(lists[i]['Price'][1:]))
 
 scope = ['https://spreadsheets.google.com/feeds',
          'https://www.googleapis.com/auth/drive']
@@ -23,4 +55,12 @@ pp = pprint.PrettyPrinter()
 all_cells = sheet.get_all_records(sheet)
 print(len(all_cells))
 print(type(all_cells))
+get_allcategories(all_cells) 
 pp.pprint(all_cells)
+
+print(f'Total rent is ${rent[0]}')
+print(f'Total utility is ${sum(utility)}')
+print(f'Total travel is ${sum(travel)}')
+print(f'Total merchandise is ${sum(merchandise)}')
+print(f'Total food is ${sum(food)}')
+print(f'Total general is ${sum(general)}')
