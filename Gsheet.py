@@ -10,7 +10,7 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name('client_sheet.jso
 
 gc = gspread.authorize(credentials)
 
-sheet = gc.open('Practice').get_worksheet(1)
+sheet = gc.open('Copy_of_Kharcha_US').get_worksheet(2)
 pp = pprint.PrettyPrinter()
 
 #json_key = json.load(open('creds.json')) # json credentials you downloaded earlier
@@ -21,4 +21,6 @@ pp = pprint.PrettyPrinter()
 #file = gspread.authorize(credentials) # authenticate with Google
 #sheet = file.open("Copy_of_Kharcha_US").sheet1
 all_cells = sheet.get_all_records(sheet)
+print(len(all_cells))
+print(type(all_cells))
 pp.pprint(all_cells)
