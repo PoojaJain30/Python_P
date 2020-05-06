@@ -5,8 +5,12 @@ from requests.exceptions import HTTPError
 import smtplib
 
 #All variables declaration 
-handle = input('Enter the twitter handle to get data: ')
+handle = ''
 data = {}
+sender_email = 'poojapatil38@gmail.com'
+password = ''
+message = ''
+
 #Get the response content from tweeter
 def is_good_response(res):
     content_type = res.headers['Content-Type'].lower()
@@ -40,9 +44,27 @@ def get_twitter_data(response):
     #Tweets
     data['tweets'] = html.findAll('li',class_='ProfileNav-item--tweets')[0].findAll('span',class_='ProfileNav-value')[0].get('data-count')
     return data
+
 #Sending data via email 
+def send_email(receiver_email,text,sender_email,password):
+     try:
+         smtpObj = smtplib.SMTP('smtp.gmail.com',587)
+         smtpObj.ehlo()
+         smtpObj.starttls()
+         smtpObj.login(sender_email,password)
+         smtpObj.sendmail(sender_email,receiver_email,text)
+     except Exception as err:
+         print(f'Error occured smtp: {err}')
+     finally:
+         smtpObj.quit()
 
 #final calls
-response = get_response('https://twitter.com/'+ handle)
-if response is not None:
-    print(get_twitter_data(response))
+if __name__ == '__main__':
+    handle = input('Enter the twitter handle to get data: ')
+    password = input('Enter you email password: ')
+    response = get_response('https://twitter.com/'+ handle)
+    if response is not None:
+        print(get_twitter_data(response))
+        message = 'Subject: Your Twitter info\nDear '+handle+', \nYou have '+ data['followers']+'Followers and '+data['following']+' total following.\nYou liked '+data['liked']+' and total tweets so far is '+data['tweets']+'.\nThank you'
+        print(message)
+        send_email('ankit.jain08@gmail.com',message,sender_email,password)
